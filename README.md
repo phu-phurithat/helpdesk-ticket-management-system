@@ -1,4 +1,4 @@
-# HelpDesk App 📞💻  
+# HelpDesk Ticket Management App 📞💻  
 
 ## Overview  
 HelpDesk App is a modern ticketing system for customer support, built with a **React** frontend and a **Spring Boot** backend. It create, track, and manage support requests efficiently.  
