@@ -108,8 +108,4 @@ The API is fully documented using **Swagger**.
 
 ✅ RESTful API with Swagger Docs  
 
----
-
-## 📜 License  
-This project is **open-source** under the MIT License.  
 
