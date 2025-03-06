@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: helpdesk
+      MYSQL_PASSWORD: root
+    ports:
+      - 3307:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - default
+
+  ticket-service:
+    build:
+      context: ./ticket-service
+      dockerfile: Dockerfile
+    container_name: ticket-service
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/helpdesk
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - default
+
+  helpdesk-management-web:
+    build:
+      context: ./helpdesk-management-web
+      dockerfile: Dockerfile
+    container_name: helpdesk-management-web
+    restart: always
+    ports:
+      - 5173:5173
+    networks:
+      - default
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: mysql
+    depends_on:
+      - mysql
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
+volumes:
+  mysql:

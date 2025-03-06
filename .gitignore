@@ -4,3 +4,4 @@
 .idea/compiler.xml
 *.xml
 /.idea
+/mysql
